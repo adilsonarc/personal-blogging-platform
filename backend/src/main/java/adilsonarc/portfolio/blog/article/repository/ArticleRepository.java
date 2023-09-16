@@ -1,5 +1,6 @@
-package adilsonarc.portfolio.blog.article;
+package adilsonarc.portfolio.blog.article.repository;
 
+import adilsonarc.portfolio.blog.article.Article;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

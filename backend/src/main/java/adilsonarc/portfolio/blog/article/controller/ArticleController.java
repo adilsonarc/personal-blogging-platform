@@ -1,5 +1,9 @@
-package adilsonarc.portfolio.blog.article;
+package adilsonarc.portfolio.blog.article.controller;
 
+import adilsonarc.portfolio.blog.article.controller.model.ArticleReadModel;
+import adilsonarc.portfolio.blog.article.controller.model.ArticleWriteModel;
+import adilsonarc.portfolio.blog.article.service.ArticleService;
+import adilsonarc.portfolio.blog.article.util.ArticleMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

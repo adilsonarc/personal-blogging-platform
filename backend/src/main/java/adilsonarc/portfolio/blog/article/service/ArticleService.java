@@ -1,5 +1,7 @@
-package adilsonarc.portfolio.blog.article;
+package adilsonarc.portfolio.blog.article.service;
 
+import adilsonarc.portfolio.blog.article.Article;
+import adilsonarc.portfolio.blog.article.repository.ArticleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
