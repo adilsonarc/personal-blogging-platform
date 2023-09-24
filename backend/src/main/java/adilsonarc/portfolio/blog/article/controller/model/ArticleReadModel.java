@@ -1,4 +1,6 @@
 package adilsonarc.portfolio.blog.article.controller.model;
 
-public class ArticleReadModel {
+import java.util.UUID;
+
+public record ArticleReadModel(UUID id, String title) {
 }

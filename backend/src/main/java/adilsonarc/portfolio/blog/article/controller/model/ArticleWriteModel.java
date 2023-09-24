@@ -1,4 +1,4 @@
 package adilsonarc.portfolio.blog.article.controller.model;
 
-public class ArticleWriteModel {
+public record ArticleWriteModel() {
 }
