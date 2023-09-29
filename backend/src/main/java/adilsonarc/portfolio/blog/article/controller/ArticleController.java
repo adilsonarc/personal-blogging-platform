@@ -22,9 +22,9 @@ public class ArticleController {
         return mapper.map(articleService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ArticleReadModel getArticle(@PathVariable UUID id) {
-        return mapper.map(articleService.findById(id).orElseThrow());
+    @GetMapping("/{articleId}")
+    public ArticleReadModel getArticleById(@PathVariable UUID articleId) {
+        return mapper.map(articleService.findById(articleId).orElseThrow());
     }
 
     @PostMapping
@@ -32,14 +32,14 @@ public class ArticleController {
         return mapper.map(articleService.create(mapper.map(article)));
     }
 
-    @PutMapping("/{id}")
-    public ArticleReadModel updateArticle(@PathVariable Long id, @RequestBody ArticleWriteModel article) {
-        return mapper.map(articleService.update(mapper.map(article)));
+    @PutMapping("/{articleId}")
+    public ArticleReadModel updateArticle(@PathVariable UUID articleId, @RequestBody ArticleWriteModel article) {
+        return mapper.map(articleService.update(mapper.map(articleId, article)));
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteArticle(@PathVariable UUID id) {
-        articleService.delete(id);
+    @DeleteMapping("/{articleId}")
+    public void deleteArticle(@PathVariable UUID articleId) {
+        articleService.delete(articleId);
     }
 }
 
