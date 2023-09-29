@@ -53,6 +53,7 @@ sonar {
         property "sonar.projectKey", "adilsonarc_personal-blogging-platform"
         property "sonar.organization", "adilsonarc"
         property "sonar.host.url", "https://sonarcloud.io"
+        property 'sonar.projectKey', '360f7269e7992d74c0c65382a3ff5154b7d0312c'
     }
 }
 
