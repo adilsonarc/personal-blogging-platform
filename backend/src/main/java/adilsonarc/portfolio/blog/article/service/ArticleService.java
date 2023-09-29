@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -18,19 +19,21 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
-    public Optional<Article> findById(Long id) {
+    public Optional<Article> findById(UUID id) {
         return articleRepository.findById(id);
     }
 
     public Article create(Article article) {
-        return articleRepository.create(article);
+        return articleRepository.save(article);
     }
 
     public Article update(Article article) {
-        return articleRepository.update(article);
+        return articleRepository.save(article);
     }
 
-    public void delete(Long id) {
-        articleRepository.delete(id);
+    public void delete(UUID id) {
+        articleRepository.findById(id)
+                .ifPresent(article -> articleRepository.delete(article));
+        ;
     }
 }

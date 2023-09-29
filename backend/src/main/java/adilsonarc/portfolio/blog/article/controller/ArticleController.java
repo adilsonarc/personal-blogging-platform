@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/articles")
@@ -22,7 +23,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ArticleReadModel getArticle(@PathVariable Long id) {
+    public ArticleReadModel getArticle(@PathVariable UUID id) {
         return mapper.map(articleService.findById(id).orElseThrow());
     }
 
@@ -37,7 +38,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteArticle(@PathVariable Long id) {
+    public void deleteArticle(@PathVariable UUID id) {
         articleService.delete(id);
     }
 }

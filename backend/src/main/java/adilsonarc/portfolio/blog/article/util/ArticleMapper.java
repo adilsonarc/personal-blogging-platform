@@ -11,8 +11,6 @@ import java.util.List;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
 public interface ArticleMapper {
     List<ArticleReadModel> map(List<Article> articles);
-
     ArticleReadModel map(Article article);
-
     Article map(ArticleWriteModel article);
 }
