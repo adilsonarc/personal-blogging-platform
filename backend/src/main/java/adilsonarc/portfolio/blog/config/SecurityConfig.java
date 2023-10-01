@@ -14,38 +14,13 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /*
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorizeHttpRequests ->
-                        authorizeHttpRequests
-                                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
-                                .anyRequest()
-                                .authenticated()
-                )
-                .headers(httpSecurityHeadersConfigurer ->
-                        httpSecurityHeadersConfigurer.frameOptions(frameOptionsConfig ->
-                                frameOptionsConfig.sameOrigin()))
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-                .csrf(AbstractHttpConfigurer::disable)
-                .headers(httpSecurityHeadersConfigurer ->
-                        httpSecurityHeadersConfigurer.frameOptions(frameOptionsConfig ->
-                                frameOptionsConfig.sameOrigin()));
-
-        return http.build();
-    }
-     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorizeRequests -> authorizeRequests
-                                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
 
-                                .anyRequest()
+                        .anyRequest()
                         .authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults())
