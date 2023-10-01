@@ -37,4 +37,7 @@ jobs:
         run: |
           cd backend
           chmod +x ./gradlew  # This line grants execute permissions
-          ./gradlew build sonar --info
+          ./gradlew build sonar  \
+          -Dsonar.projectKey=adilsonarc_personal-blogging-platform \
+          -Dsonar.organization=adilsonarc \
+          --info
