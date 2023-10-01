@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 
 @Value
 public class Comment {
-    //User commenter;
     String content;
-    String comment;
     LocalDateTime date;
 }
