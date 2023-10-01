@@ -45,6 +45,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Change to Backend Directory
+        run: cd backend
+    
       - name: Analyze with SonarCloud
 
         # You can pin the exact commit or the version.
