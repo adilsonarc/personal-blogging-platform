@@ -36,4 +36,5 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd backend
+          chmod +x ./gradlew  # This line grants execute permissions
           ./gradlew build sonar --info
