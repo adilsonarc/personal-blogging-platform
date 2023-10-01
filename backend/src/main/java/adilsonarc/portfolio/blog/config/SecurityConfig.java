@@ -16,10 +16,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorizeRequests -> authorizeRequests
+        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
-
                         .anyRequest()
                         .authenticated())
                 .httpBasic(withDefaults())
