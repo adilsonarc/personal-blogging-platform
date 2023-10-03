@@ -2,6 +2,7 @@ package adilsonarc.portfolio.blog.article.controller;
 
 import adilsonarc.portfolio.blog.article.Article;
 import adilsonarc.portfolio.blog.article.service.ArticleService;
+import adilsonarc.portfolio.blog.article.util.ArticleMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,6 +38,8 @@ class ArticleControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ArticleService articleService;
+    @SpyBean
+    private ArticleMapper mapper;
 
     @ParameterizedTest(name = "{index} => case: {0}")
     @MethodSource
