@@ -1,12 +1,9 @@
 package adilsonarc.portfolio.blog.article.controller;
 
 import adilsonarc.portfolio.blog.article.Article;
-import adilsonarc.portfolio.blog.article.controller.model.ArticleWriteModel;
 import adilsonarc.portfolio.blog.article.service.ArticleService;
-import adilsonarc.portfolio.blog.article.util.ArticleMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -15,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -40,16 +36,6 @@ class ArticleControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ArticleService articleService;
-    @SpyBean
-    private ArticleMapper mapper;
-
-    @BeforeEach
-    void setUp() {
-        given(mapper.map(any(List.class))).willCallRealMethod();
-        given(mapper.map(any(Article.class))).willCallRealMethod();
-        given(mapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
-        given(mapper.map(any(UUID.class), any(ArticleWriteModel.class))).willCallRealMethod();
-    }
 
     @ParameterizedTest(name = "{index} => case: {0}")
     @MethodSource
@@ -122,7 +108,7 @@ class ArticleControllerTest {
         final String id = "925198d4-6d23-4863-aa3f-f98431a74606";
         final String title = "New Article";
         final String content = "This is a new article.";
-        final String body = String.format("{\"title\":\"%s\",\"content\":\"%s\"}", id, title, content);
+        final String body = String.format("{\"title\":\"%s\",\"content\":\"%s\"}", title, content);
         final Article article = Article.builder().id(UUID.fromString(id)).title(title).content(content).build();
 
         given(articleService.create(any(Article.class))).willReturn(article);
