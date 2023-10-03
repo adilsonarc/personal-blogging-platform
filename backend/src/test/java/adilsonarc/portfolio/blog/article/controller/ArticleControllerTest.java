@@ -1,15 +1,16 @@
 package adilsonarc.portfolio.blog.article.controller;
 
 import adilsonarc.portfolio.blog.article.Article;
+import adilsonarc.portfolio.blog.article.controller.model.ArticleWriteModel;
 import adilsonarc.portfolio.blog.article.service.ArticleService;
 import adilsonarc.portfolio.blog.article.util.ArticleMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,6 +42,14 @@ class ArticleControllerTest {
     private ArticleService articleService;
     @SpyBean
     private ArticleMapper mapper;
+
+    @BeforeEach
+    void setUp() {
+        given(mapper.map(any(List.class))).willCallRealMethod();
+        given(mapper.map(any(Article.class))).willCallRealMethod();
+        given(mapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
+        given(mapper.map(any(UUID.class), any(ArticleWriteModel.class))).willCallRealMethod();
+    }
 
     @ParameterizedTest(name = "{index} => case: {0}")
     @MethodSource
