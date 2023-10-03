@@ -9,10 +9,13 @@ import org.mapstruct.Mapper;
 import java.util.List;
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
+@Mapper(componentModel = "spring")
 public interface ArticleMapper {
     List<ArticleReadModel> map(List<Article> articles);
+
     ArticleReadModel map(Article article);
+
     Article map(ArticleWriteModel article);
+
     Article map(UUID id, ArticleWriteModel article);
 }

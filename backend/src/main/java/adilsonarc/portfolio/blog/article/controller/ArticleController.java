@@ -1,10 +1,13 @@
 package adilsonarc.portfolio.blog.article.controller;
 
+import adilsonarc.portfolio.blog.article.Article;
 import adilsonarc.portfolio.blog.article.controller.model.ArticleReadModel;
 import adilsonarc.portfolio.blog.article.controller.model.ArticleWriteModel;
 import adilsonarc.portfolio.blog.article.service.ArticleService;
 import adilsonarc.portfolio.blog.article.util.ArticleMapper;
+import adilsonarc.portfolio.blog.util.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +27,10 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     public ArticleReadModel getArticleById(@PathVariable UUID articleId) {
-        return mapper.map(articleService.findById(articleId).orElseThrow());
+        final Article foundArticle = articleService.findById(articleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Article not found with id " + articleId));
+        return mapper.map(foundArticle);
+
     }
 
     @PostMapping
@@ -33,7 +39,8 @@ public class ArticleController {
     }
 
     @PutMapping("/{articleId}")
-    public ArticleReadModel updateArticle(@PathVariable UUID articleId, @RequestBody ArticleWriteModel article) {
+    public ArticleReadModel updateArticle(@PathVariable UUID articleId,
+                                          @RequestBody ArticleWriteModel article) {
         return mapper.map(articleService.update(mapper.map(articleId, article)));
     }
 

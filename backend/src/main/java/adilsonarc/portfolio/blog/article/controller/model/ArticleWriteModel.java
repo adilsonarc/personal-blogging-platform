@@ -1,4 +1,5 @@
 package adilsonarc.portfolio.blog.article.controller.model;
 
-public record ArticleWriteModel(String title) {
+public record ArticleWriteModel(String title,
+                                String content) {
 }

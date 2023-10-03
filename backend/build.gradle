@@ -35,6 +35,7 @@ dependencies {
     implementation 'org.mapstruct:mapstruct-jdk8:1.5.5.Final'
     implementation 'org.mapstruct:mapstruct-parent:1.5.5.Final'
     implementation 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    implementation 'org.apache.commons:commons-lang3:3.13.0'
     annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 

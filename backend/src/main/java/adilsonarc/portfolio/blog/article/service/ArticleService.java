@@ -5,7 +5,9 @@ import adilsonarc.portfolio.blog.article.repository.ArticleRepository;
 import adilsonarc.portfolio.blog.util.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,7 +19,8 @@ public class ArticleService {
     private final ArticleRepository articleRepository;
 
     public List<Article> findAll() {
-        return articleRepository.findAll();
+        final List<Article> foundArticles = articleRepository.findAll();
+        return Collections.unmodifiableList(foundArticles);
     }
 
     public Optional<Article> findById(final UUID id) {
@@ -28,12 +31,14 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
+    @Transactional
     public Article update(final Article updatedArticle) {
-        return articleRepository.findById(updatedArticle.getId())
+        return findById(updatedArticle.getId())
                 .map(article -> articleRepository.save(updatedArticle))
                 .orElseThrow(getResourceNotFoundException(updatedArticle.getId()));
     }
 
+    @Transactional
     public void delete(final UUID id) {
         Article deletedArticle = findById(id)
                 .orElseThrow(getResourceNotFoundException(id));
