@@ -67,9 +67,15 @@ sonar {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.9"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
 jacocoTestReport {
     reports {
-        xml.required = true
+        xml.enabled true  // Generates XML report (required for SonarCloud)
+        html.enabled true  // Generates HTML report (useful for humans)
     }
 }
 
