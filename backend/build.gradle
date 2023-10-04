@@ -76,6 +76,8 @@ jacocoTestReport {
     reports {
         xml.enabled true  // Generates XML report (required for SonarCloud)
         html.enabled true  // Generates HTML report (useful for humans)
+        html.destination file("${buildDir}/reports/jacoco/html")
+        xml.destination file("${buildDir}/reports/jacoco/xml")
     }
 }
 
