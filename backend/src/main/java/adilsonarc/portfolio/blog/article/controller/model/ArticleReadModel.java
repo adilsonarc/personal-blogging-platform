@@ -18,4 +18,5 @@ public record ArticleReadModel(
         Integer views,
         Integer likes,
         String source
-) {}
+) {
+}

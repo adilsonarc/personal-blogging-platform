@@ -44,8 +44,8 @@ public class ArticleController {
     }
 
     @DeleteMapping("/{articleId}")
-    public void deleteArticle(@PathVariable UUID articleId) {
-        articleService.delete(articleId);
+    public void deleteById(@PathVariable UUID articleId) {
+        articleService.deleteById(articleId);
     }
 }
 

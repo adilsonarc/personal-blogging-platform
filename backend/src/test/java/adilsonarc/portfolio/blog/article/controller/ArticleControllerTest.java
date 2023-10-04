@@ -39,8 +39,6 @@ class ArticleControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ArticleService articleService;
-    @SpyBean
-    private ArticleMapper articleMapper;
 
     @ParameterizedTest(name = "{index} => case: {0}")
     @MethodSource
@@ -89,7 +87,7 @@ class ArticleControllerTest {
         final Article article = Article.builder().id(id).title(title).content(content).build();
 
         given(articleService.create(any(Article.class))).willReturn(article);
-        given(articleMapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
+        // given(articleMapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
 
         given(articleService.findById(argThat(arg -> StringUtils.equals(arg.toString(), id.toString()))))
                 .willReturn(Optional.of(article));
@@ -123,8 +121,6 @@ class ArticleControllerTest {
         final Article article = Article.builder().id(UUID.fromString(id)).title(title).content(content).build();
 
         given(articleService.create(any(Article.class))).willReturn(article);
-        given(articleMapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
-        given(articleMapper.map(any(Article.class))).willCallRealMethod();
 
         mockMvc.perform(post("/articles")
                         .contentType(MediaType.APPLICATION_JSON)

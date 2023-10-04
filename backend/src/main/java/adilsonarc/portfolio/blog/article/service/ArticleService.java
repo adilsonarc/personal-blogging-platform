@@ -39,7 +39,7 @@ public class ArticleService {
     }
 
     @Transactional
-    public void delete(final UUID id) {
+    public void deleteById(final UUID id) {
         Article deletedArticle = findById(id)
                 .orElseThrow(getResourceNotFoundException(id));
         articleRepository.delete(deletedArticle);
