@@ -67,10 +67,22 @@ sonar {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.9"
+    //reportsDir = file("$buildDir/reports/jacoco")
+}
+
 jacocoTestReport {
     reports {
-        xml.required = true
+        xml.required.set(true)  // Generates XML report (required for SonarCloud)
     }
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
 
 tasks.named('test') {
