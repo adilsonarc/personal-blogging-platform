@@ -30,11 +30,11 @@ jobs:
       #    path: ~/.gradle/caches
       #    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
       #    restore-keys: ${{ runner.os }}-gradle
-      - name: Run JaCoCo Report
-        run: |
-          cd backend
-          chmod +x ./gradlew  # This line grants execute permissions
-          ./gradlew jacocoTestReport
+      #- name: Run JaCoCo Report
+      #  run: |
+      #    cd backend
+      #    chmod +x ./gradlew  # This line grants execute permissions
+      #    ./gradlew jacocoTestReport
 
       - name: Build and analyze
         env:
@@ -43,7 +43,7 @@ jobs:
         run: |
           cd backend
           chmod +x ./gradlew  # This line grants execute permissions
-          ./gradlew build sonar  \
+          ./gradlew build jacocoTestReport sonar  \
           -Dsonar.projectKey=adilsonarc_personal-blogging-platform \
           -Dsonar.organization=adilsonarc \
           --info
