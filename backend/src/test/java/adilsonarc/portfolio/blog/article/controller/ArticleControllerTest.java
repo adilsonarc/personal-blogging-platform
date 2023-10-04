@@ -86,7 +86,7 @@ class ArticleControllerTest {
         final UUID id = UUID.fromString("a52f4d80-f140-4146-acb5-cb843cc5cb5a");
         final String title = "Article title";
         final String content = "Article content";
-        final Article article = Article.builder().id(id).title("article with id").build();
+        final Article article = Article.builder().id(id).title(title).content(content).build();
 
         given(articleService.create(any(Article.class))).willReturn(article);
         given(articleMapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
