@@ -1,7 +1,9 @@
 package adilsonarc.portfolio.blog.article.controller;
 
 import adilsonarc.portfolio.blog.article.Article;
+import adilsonarc.portfolio.blog.article.controller.model.ArticleWriteModel;
 import adilsonarc.portfolio.blog.article.service.ArticleService;
+import adilsonarc.portfolio.blog.article.util.ArticleMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,6 +39,8 @@ class ArticleControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ArticleService articleService;
+    @SpyBean
+    private ArticleMapper articleMapper;
 
     @ParameterizedTest(name = "{index} => case: {0}")
     @MethodSource
@@ -78,17 +83,23 @@ class ArticleControllerTest {
 
     @Test
     void givenArticle_whenGetArticleById_thenJsonArticle() throws Exception {
-        final String id = "a52f4d80-f140-4146-acb5-cb843cc5cb5a";
-        final Article article = Article.builder().id(UUID.fromString(id)).title("article with id").build();
+        final UUID id = UUID.fromString("a52f4d80-f140-4146-acb5-cb843cc5cb5a");
+        final String title = "Article title";
+        final String content = "Article content";
+        final Article article = Article.builder().id(id).title("article with id").build();
 
-        given(articleService.findById(argThat(arg -> StringUtils.equals(arg.toString(), id))))
+        given(articleService.create(any(Article.class))).willReturn(article);
+        given(articleMapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
+
+        given(articleService.findById(argThat(arg -> StringUtils.equals(arg.toString(), id.toString()))))
                 .willReturn(Optional.of(article));
 
         mockMvc.perform(get("/articles/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(article.getId().toString()))
-                .andExpect(jsonPath("$.title").value(article.getTitle()));
+                .andExpect(jsonPath("$.title").value(article.getTitle()))
+                .andExpect(jsonPath("$.content").value(article.getContent()));
     }
 
     @ParameterizedTest(name = "{index} => case: {0}, id:{1}")
@@ -112,6 +123,8 @@ class ArticleControllerTest {
         final Article article = Article.builder().id(UUID.fromString(id)).title(title).content(content).build();
 
         given(articleService.create(any(Article.class))).willReturn(article);
+        given(articleMapper.map(any(ArticleWriteModel.class))).willCallRealMethod();
+        given(articleMapper.map(any(Article.class))).willCallRealMethod();
 
         mockMvc.perform(post("/articles")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -129,7 +142,7 @@ class ArticleControllerTest {
         final String id = "a52f4d80-f140-4146-acb5-cb843cc5cb5a";
         final String title = "Updated Article";
         final String content = "Updated article content.";
-        final String body = String.format("{\"title\":\"{%s}\",\"content\":\"{%s}\"}", title, content);
+        final String body = String.format("{\"title\":\"%s\",\"content\":\"%s\"}", title, content);
         final Article article = Article.builder().id(UUID.fromString(id)).title(title).content(content).build();
 
         given(articleService.update(any(Article.class))).willReturn(article);
