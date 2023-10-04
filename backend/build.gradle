@@ -78,7 +78,7 @@ jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ["adilsonarc/portfolio/blog/PersonalBlogApplication"])
+            fileTree(dir: it, exclude: ["adilsonarc/portfolio/blog/PersonalBlogApplication,java"])
         }))
     }
 }
