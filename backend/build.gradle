@@ -74,7 +74,7 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        xml.required.set(false)  // Generates XML report (required for SonarCloud)
+        xml.required.set(true)  // Generates XML report (required for SonarCloud)
         html.required.set(true)  // Generates HTML report (useful for humans)
     }
 }
