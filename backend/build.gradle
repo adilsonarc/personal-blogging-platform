@@ -75,8 +75,14 @@ jacoco {
 jacocoTestReport {
     reports {
         xml.required.set(true)  // Generates XML report (required for SonarCloud)
-        html.required.set(true)  // Generates HTML report (useful for humans)
     }
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
 
 tasks.named('test') {
