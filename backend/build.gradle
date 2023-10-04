@@ -69,7 +69,7 @@ sonar {
 
 jacoco {
     toolVersion = "0.8.9"
-    reportsDir = file("$buildDir/reports/jacoco")
+    //reportsDir = file("$buildDir/reports/jacoco")
 }
 
 jacocoTestReport {
