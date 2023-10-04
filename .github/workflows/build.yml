@@ -31,7 +31,10 @@ jobs:
       #    key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
       #    restore-keys: ${{ runner.os }}-gradle
       - name: Run JaCoCo Report
-        run: ./gradlew jacocoTestReport
+        run: |
+          cd backend
+          chmod +x ./gradlew  # This line grants execute permissions
+          ./gradlew jacocoTestReport
 
       - name: Build and analyze
         env:
