@@ -76,14 +76,6 @@ jacocoTestReport {
     reports {
         xml.required.set(true)  // Generates XML report (required for SonarCloud)
     }
-
-
-    afterEvaluate {
-        // Exclude data-only classes from test coverage metrics, as they don't contain business logic to be tested.
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['adilsonarc/portfolio/blog/article.class'])
-        }))
-    }
 }
 
 test {
