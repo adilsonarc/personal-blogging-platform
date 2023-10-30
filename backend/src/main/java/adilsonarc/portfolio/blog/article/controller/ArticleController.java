@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/articles")
+@RequestMapping("api/v1/articles")
 @AllArgsConstructor
 public class ArticleController {
     private ArticleMapper articleMapper;

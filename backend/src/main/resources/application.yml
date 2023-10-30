@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: admin
+    password: admin
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+
+sonar:
+  projectKey: adilsonarc_personal-blogging-platform
+  organization: adilsonarc
+  sources: src
+  tests: src/test
+  java:
+    binaries: build/classes
+    coveragePlugin: jacoco
+  coverage:
+    jacoco:
+      xmlReportPaths: build/reports/jacoco/test/jacocoTestReport.xml
