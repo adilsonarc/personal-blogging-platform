@@ -4,6 +4,7 @@ import adilsonarc.portfolio.blog.article.Article;
 import adilsonarc.portfolio.blog.article.service.ArticleService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -33,9 +37,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class ArticleControllerTest {
     @Autowired
+    private WebApplicationContext context;
     private MockMvc mockMvc;
     @MockBean
     private ArticleService articleService;
+
+    @BeforeEach
+    public void setup() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }
 
     @ParameterizedTest(name = "{index} => case: {0}")
     @MethodSource
@@ -46,7 +59,7 @@ class ArticleControllerTest {
 
         given(articleService.findAll()).willReturn(articles);
 
-        mockMvc.perform(get("/articles"))
+        mockMvc.perform(get("/api/v1/articles"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").value(hasSize(articles.size())));
@@ -89,7 +102,7 @@ class ArticleControllerTest {
         given(articleService.findById(argThat(arg -> StringUtils.equals(arg.toString(), id.toString()))))
                 .willReturn(Optional.of(article));
 
-        mockMvc.perform(get("/articles/" + id))
+        mockMvc.perform(get("/api/v1/articles/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(article.getId().toString()))
@@ -105,7 +118,7 @@ class ArticleControllerTest {
     ) throws Exception {
         assertNotNull(testCase); // avoid unused warning
 
-        mockMvc.perform(get("/articles/" + wrongID))
+        mockMvc.perform(get("/api/v1/articles/" + wrongID))
                 .andExpect(status().is(expectedStatus));
     }
 
@@ -119,7 +132,7 @@ class ArticleControllerTest {
 
         given(articleService.create(any(Article.class))).willReturn(article);
 
-        mockMvc.perform(post("/articles")
+        mockMvc.perform(post("/api/v1/articles")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
                         .accept(MediaType.APPLICATION_JSON))
@@ -140,7 +153,7 @@ class ArticleControllerTest {
 
         given(articleService.update(any(Article.class))).willReturn(article);
 
-        mockMvc.perform(put("/articles/" + id)
+        mockMvc.perform(put("/api/v1/articles/" + id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(body)
                         .accept(MediaType.APPLICATION_JSON))
@@ -159,7 +172,7 @@ class ArticleControllerTest {
     ) throws Exception {
         assertNotNull(testCase); // avoid unused warning
 
-        mockMvc.perform(put("/articles/" + wrongID)
+        mockMvc.perform(put("/api/v1/articles/" + wrongID)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"title\":\"updated article\",\"content\":\"Updated content.\"}"))
                 .andExpect(status().is(expectedStatus));
@@ -169,7 +182,7 @@ class ArticleControllerTest {
     void givenId_whenDeleteArticle_thenReturnSuccessHttpCode() throws Exception {
         final String id = "a52f4d80-f140-4146-acb5-cb843cc5cb5a";
 
-        mockMvc.perform(delete("/articles/" + id))
+        mockMvc.perform(delete("/api/v1/articles/" + id))
                 .andExpect(status().isOk());
     }
 
