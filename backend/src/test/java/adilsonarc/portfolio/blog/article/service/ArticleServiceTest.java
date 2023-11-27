@@ -1,13 +1,13 @@
 package adilsonarc.portfolio.blog.article.service;
 
 import adilsonarc.portfolio.blog.article.Article;
-import adilsonarc.portfolio.blog.article.repository.ArticleRepository;
+import adilsonarc.portfolio.blog.article.ArticleRepository;
+import adilsonarc.portfolio.blog.article.ArticleService;
 import adilsonarc.portfolio.blog.util.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;

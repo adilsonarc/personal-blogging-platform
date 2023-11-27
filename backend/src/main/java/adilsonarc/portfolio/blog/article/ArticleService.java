@@ -1,7 +1,7 @@
-package adilsonarc.portfolio.blog.article.service;
+package adilsonarc.portfolio.blog.article;
 
 import adilsonarc.portfolio.blog.article.Article;
-import adilsonarc.portfolio.blog.article.repository.ArticleRepository;
+import adilsonarc.portfolio.blog.article.ArticleRepository;
 import adilsonarc.portfolio.blog.util.exceptions.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

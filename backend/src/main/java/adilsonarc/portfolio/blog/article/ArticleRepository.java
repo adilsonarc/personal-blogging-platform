@@ -1,4 +1,4 @@
-package adilsonarc.portfolio.blog.article.repository;
+package adilsonarc.portfolio.blog.article;
 
 import adilsonarc.portfolio.blog.article.Article;
 import org.springframework.data.jpa.repository.JpaRepository;

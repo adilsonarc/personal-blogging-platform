@@ -1,7 +1,7 @@
 package adilsonarc.portfolio.blog.article.controller;
 
 import adilsonarc.portfolio.blog.article.Article;
-import adilsonarc.portfolio.blog.article.service.ArticleService;
+import adilsonarc.portfolio.blog.article.ArticleService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;

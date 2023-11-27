@@ -1,4 +1,4 @@
-package adilsonarc.portfolio.blog.article.util;
+package adilsonarc.portfolio.blog.article;
 
 import adilsonarc.portfolio.blog.article.Article;
 import adilsonarc.portfolio.blog.article.controller.model.ArticleReadModel;
