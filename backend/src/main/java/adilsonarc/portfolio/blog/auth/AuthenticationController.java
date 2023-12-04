@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final AuthenticationService service;
 
-    @PostMapping("/register")
-    public AuthenticationResponse register(@RequestBody RegisterRequest request) {
-        return service.register(request);
+    @PostMapping("/sign-up")
+    public AuthenticationResponse signUp(@RequestBody SignUpRequest request) {
+        return service.signUp(request);
     }
 
-    @PostMapping("/authenticate")
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest request) {
-        return service.authenticate(request);
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest request) {
+        return service.login(request);
     }
 
 }

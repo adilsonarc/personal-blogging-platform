@@ -1,0 +1,35 @@
+.nav-bar {
+  /* Flexbox */
+  display: flex;
+  gap: 10px;
+  /* Misc */
+  margin: 20px;
+
+}
+
+.nav-bar-active {
+  background-color: #7C6464 !important;
+}
+
+.nav-bar div {
+  display: flex;
+}
+
+/* Different style for the 2 last elements more to the right */
+.nav-bar div:last-child {
+  /* flex */
+  align-self: flex-end;
+  /* Misc */
+  margin-left: auto;
+}
+
+.nav-bar div:last-child a {
+  background-color: #8C959C;
+}
+
+.nav-bar div:last-child a:hover {
+  background-color: #281E27;
+}
+
+
+

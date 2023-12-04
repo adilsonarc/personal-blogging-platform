@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+html {
+  background-color: #F4F4F3;
+  color: #30333D;
+}
+
+.button {
+  /* Misc */
+  width: 90px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+
+  border: #281E27 2px solid;
+  border-radius: 20px;
+
+  text-decoration-line: none;
+  color: #F4F4F3;
+
+  background-color: #ED633A;
+}
+
+.button:hover {
+  background-color: #281E27;
+  cursor: pointer;
+}

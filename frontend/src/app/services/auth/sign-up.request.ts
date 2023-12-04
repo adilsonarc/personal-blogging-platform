@@ -1,4 +1,4 @@
-interface RegisterRequestModel {
+export interface SignUpRequest {
   firstName: string;
   lastName: string;
   email: string;

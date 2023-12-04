@@ -1,9 +1,12 @@
-<p>nav-bar works!</p>
-<nav>
-  <li><a class="button" routerLink="/blog">Blog</a></li>
-  <li><a class="button" routerLink="/about-me">About me</a></li>
-  <li><a class="button" routerLink="/resume">Resume</a></li>
+<nav class="nav-bar">
+  <div>
+    <a class="button" routerLinkActive="nav-bar-active" routerLink="blog">Blog</a>
+    <a class="button" routerLinkActive="nav-bar-active" routerLink="about-me" >About me</a>
+    <a class="button" routerLinkActive="nav-bar-active" routerLink="resume" >Resume</a>
+  </div>
 
-  <li><a class="button" routerLink="/register">Register</a></li>
-  <li><a class="button" routerLink="/login">Login</a></li>
+  <div>
+    <a class="button" routerLinkActive="nav-bar-active" routerLink="sign-up">Sign-up</a>
+    <a class="button" routerLinkActive="nav-bar-active" routerLink="login" >Login</a>
+  </div>
 </nav>
